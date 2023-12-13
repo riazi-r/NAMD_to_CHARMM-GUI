@@ -10,7 +10,7 @@ To use the CHARMM-GUI FF Converter (current as of Sept. 29, 2021), you need to i
   vmd -dispdev text
   mol new PSF.psf 
   mol addfile PDB.pdb
-  source write_charmm_crd.tcl
+  source pdb2crd.tcl
   writecharmmcoor "output.crd" 0 "normal"
  ```
 Usage Note: Use the "normal" keyword, even if your system > 99,999 atoms. There's a bug in the code where it won't work if you use "expanded" as stated.  
