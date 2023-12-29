@@ -8,23 +8,24 @@ To use the CHARMM-GUI FF Converter (current as of Sept. 29, 2021), you need to i
   - To use with interactive VMD console: 
   ``` 
   vmd -dispdev text
-  mol new PSF.psf 
-  mol addfile PDB.pdb
+  mol new solute.psf 
+  mol addfile solute.pdb
   source pdb2crd.tcl
-  writecharmmcoor "output.crd" 0 "normal"
+  writecharmmcoor "solute.crd" 0 "normal"
  ```
 Usage Note: Use the "normal" keyword, even if your system > 99,999 atoms. There's a bug in the code where it won't work if you use "expanded" as stated.  
  
 2. Generate CHARMM-compatible PSF with PSFGEN
 - Generate the psf with psfgen
 ``` 
-psfgen
-readmol psf PSF.psf pdb PDB.pdb
-writepsf x-plor XPLOR.psf
+package require psfgen
+readpsf solute.psf
+coordpdb solute.pdb
+writepsf x-plor solute-XPLOR.psf
 ```
-- Add "XPLOR" keyword to the header of the XPLOR.psf:
+- Add "XPLOR" keyword to the header of the solute-XPLOR.psf:
 ```
-PSF EXT CMAP XPLOR
+i.e change "PSF EXT CMAP" to "PSF EXT CMAP XPLOR"
 ```
 Thanks to the CHARMM-GUI help team, and specifically Jumin Lee and Nathan Kern for instructions here, and Lorenzo Casalino for finding a typo. (Adding the "XPLOR" keyword suddenly made this work??? Whaaat??? Why are there so many secrets?) 
 > Note: Until Sept. 29, 2021, 1pm PST, there was a bug in the CHARMM-GUI FF Converter in which it would not accept PSF files with capital letters. We have been informed that this is no longer an issue and you can name the psf file anything you want, e.g., ABBY.psf works. 
