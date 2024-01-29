@@ -89,3 +89,4 @@ proc writecharmmcoor {filename usemolid outtype} {
 	}
 	close $output
 	puts "Done with conversion"
+ }
